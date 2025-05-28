@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Zscaler Notification</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      color: #333;
+    }
+    .logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .logo img {
+      max-width: 150px;
+    }
+    .info {
+      margin-bottom: 20px;
+    }
+    .info p {
+      margin: 5px 0;
+    }
+    .continue-button {
+      text-align: center;
+    }
+    .continue-button input {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .continue-button input:hover {
+      background-color: #0056b3;
+    }
+    .support {
+      margin-top: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="https://via.placeholder.com/150" alt="Company Logo">
+    </div>
+    <h1>Access Caution</h1>
+    <div class="info">
+      <p id="reason"></p>
+      <p id="url"></p>
+    </div>
+    <form id="continue_action" method="GET" action="">
+      <input type="hidden" name="_sm_url" id="_sm_url">
+      <input type="hidden" name="_sm_rid" id="_sm_rid">
+      <input type="hidden" name="_sm_cat" id="_sm_cat">
+      <div class="continue-button">
+        <input type="submit" value="Continue">
+      </div>
+    </form>
+    <div class="support">
+      <p>If you need assistance, please contact IT Support at <a href="mailto:support@company.com">support@company.com</a>.</p>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    document.getElementById("reason").textContent = "Reason: " + params.get("reason");
+    document.getElementById("url").textContent = "URL: " + params.get("url");
+
+    document.getElementById("_sm_url").value = params.get("url");
+    document.getElementById("_sm_rid").value = params.get("zsq");
+    document.getElementById("_sm_cat").value = params.get("cat");
+
+    // Replace <ZscalerCloud> with your actual Zscaler cloud name
+    document.getElementById("continue_action").action = "https://gateway.<ZscalerCloud>:443/_sm_ctn";
+  </script>
+</body>
+</html>
