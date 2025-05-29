@@ -1,91 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Zscaler Notification</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    .container {
-      max-width: 600px;
-      margin: auto;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    h1 {
-      color: #333;
-    }
-    .logo {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .logo img {
-      max-width: 150px;
-    }
-    .info {
-      margin-bottom: 20px;
-    }
-    .info p {
-      margin: 5px 0;
-    }
-    .continue-button {
-      text-align: center;
-    }
-    .continue-button input {
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .continue-button input:hover {
-      background-color: #0056b3;
-    }
-    .support {
-      margin-top: 20px;
-      text-align: center;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Blocked</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://yourdomain.com/logo-watermark.png'); /* Replace with your watermark logo */
+            background-size: cover;
+           -color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+        .header {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e67e22;
+            margin-bottom: 20px;
+        }
+        .content {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .content b {
+            color: #e67e22;
+        }
+        .support {
+            font-size: 14px;
+            color: #555;
+        }
+        .support a {
+            color: #e67e22;
+            text-decoration: none;
+        }
+        .support a:hover {
+            text-decoration: underline;
+        }
+        .logo {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <div class="logo">
-      <img src="https://via.placeholder.com/150" alt="Company Logo">
+    <div class="container">
+        <img src="https://yourdomain.com/path-to-logo.png" alt="Persistent Logo" class="logo" style="height: 60px;">
+        <div class="header">Access Blocked</div>
+        <div class="content">
+            <p><b>URL:</b> {{URL}}</p>
+            <p><b>Reason:</b> {{REASON}}</p>
+            <p><b>Category:</b> {{CATEGORY}}</p>
+            <p><b>Reason Code:</b> {{REASON_CODE}}</p>
+            <p><b>Date:</b> {{DATE}}</p>
+            <p><b>User:</b> {{USER}}</p>
+        </div>
+        <div class="support">
+            <p>If you believe this is an error, please contact your IT support.</p>
+            <p>Email: <a href="mailto:{{SUPPORT_EMAIL}}">{{SUPPORT_EMAIL}}</a></p>
+            <p>Phone: {{HELPDESK_NUMBER}}</p>
+        </div>
     </div>
-    <h1>Access Caution</h1>
-    <div class="info">
-      <p id="reason"></p>
-      <p id="url"></p>
-    </div>
-    <form id="continue_action" method="GET" action="">
-      <input type="hidden" name="_sm_url" id="_sm_url">
-      <input type="hidden" name="_sm_rid" id="_sm_rid">
-      <input type="hidden" name="_sm_cat" id="_sm_cat">
-      <div class="continue-button">
-        <input type="submit" value="Continue">
-      </div>
-    </form>
-    <div class="support">
-      <p>If you need assistance, please contact IT Support at <a href="mailto:support@company.com">support@company.com</a>.</p>
-    </div>
-  </div>
-
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    document.getElementById("reason").textContent = "Reason: " + params.get("reason");
-    document.getElementById("url").textContent = "URL: " + params.get("url");
-
-    document.getElementById("_sm_url").value = params.get("url");
-    document.getElementById("_sm_rid").value = params.get("zsq");
-    document.getElementById("_sm_cat").value = params.get("cat");
-
-    // Replace <ZscalerCloud> with your actual Zscaler cloud name
-    document.getElementById("continue_action").action = "https://gateway.<ZscalerCloud>:443/_sm_ctn";
-  </script>
 </body>
 </html>
