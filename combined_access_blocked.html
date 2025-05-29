@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Blocked</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://www.persistent.com/wp-content/uploads/2021/03/Persistent-Brand-Guidelines.pdf');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+        .header {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff6600; /* Persistent Systems' orange theme */
+        }
+        .content {
+            margin-top: 20px;
+        }
+        .content p {
+            margin: 10px 0;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #777;
+        }
+        .footer a {
+            color: #ff6600;
+            text-decoration: none;
+        }
+        .details {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .details p {
+            margin: 5px 0;
+        }
+        .continue-button {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .continue-button input {
+            background-color: #5cb85c;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .continue-button input:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">Access Blocked</div>
+        <div class="content">
+            <p>This website is blocked due to <strong>[Your Company Name]</strong> access policies.</p>
+            <p>Access to the website <strong>{{blocked_url}}</strong> has been blocked because the transaction is not allowed.</p>
+        </div>
+        <div class="details">
+            <h2>Details</h2>
+            <p><strong>User:</strong> {{user_email}}</p>
+            <p><strong>Reason:</strong> {{reason}}</p>
+            <p><strong>Reason Code:</strong> {{reason_code}}</p>
+            <p><strong>URL Category:</strong> {{url_category}}</p>
+            <p><strong>URL:</strong> {{blocked_url}}</p>
+            <p><strong>Date:</strong> {{timestamp}}</p>
+        </div>
+        <div class="continue-button">
+            <form id="continue_action" method="GET" action="https://gateway.<Zscaler cloud>:443/_sm_ctn">
+                <input type="hidden" name="_sm_url" value="{{blocked_url}}">
+                <input type="hidden" name="_sm_rid" value="{{zsq}}">
+                <input type="hidden" name="_sm_cat" value="{{url_category}}">
+                <input type="submit" value="Continue">
+            </form>
+        </div>
+        <div class="footer">
+            <p>If you believe this is an error, please contact <a href="mailto:support@persistent.com">support@persistent.com</a>.</p>
+            <p>Contact the <strong>[Your Helpdesk Name]</strong> at <strong>{{helpdesk_number}}</strong> if you need further assistance.</p>
+        </div>
+    </div>
+    <script>
+        const data = {
+            blocked_url: "http://example.com",
+            user_email: "john.doe@example.com",
+            reason: "Malicious content",
+            reason_code: "403",
+            url_category: "Security Threat",
+            timestamp: new Date().toLocaleString(),
+            zsq: "unique_request_id",
+            helpdesk_number: "123-456-7890"
+        };
+
+        document.body.innerHTML = document.body.innerHTML.replace(/{{(.*?)}}/g, (_, key) => data[key.trim()] || '');
+    </script>
+</body>
+</html>
